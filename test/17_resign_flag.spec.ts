@@ -1,0 +1,3 @@
+
+import { expect } from "chai";import { ethers } from "hardhat";import { setup } from "./00_fixture";
+describe("T17 resign active flag",()=>{it("sets active false",async()=>{const {kyc, kycVerifier, validator, users}=await setup();const owner=users[0];await kyc.connect(kycVerifier).mint(await owner.getAddress(),"x");const stake=ethers.utils.parseEther("10000000");await validator.connect(owner).propose(await owner.getAddress(),{value:stake});await validator.connect(owner).resign(await owner.getAddress());const info=await validator.candidates(await owner.getAddress());expect(info.active).to.equal(false);});});
