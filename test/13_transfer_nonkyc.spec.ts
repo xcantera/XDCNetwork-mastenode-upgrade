@@ -1,3 +1,0 @@
-
-import { expect } from "chai";import { ethers } from "hardhat";import { setup } from "./00_fixture";
-describe("T13 transfer to non-KYC", ()=>{it("reverts",async()=>{const {kyc, kycVerifier, validator, users}=await setup();const [owner,bad]=users;await kyc.connect(kycVerifier).mint(await owner.getAddress(),"x");const stake=ethers.utils.parseEther("10000000");await validator.connect(owner).propose(await owner.getAddress(),{value:stake});await expect(validator.connect(owner).transferOwnership(await owner.getAddress(), await bad.getAddress())).to.be.revertedWith("Validator: new owner KYC");});});

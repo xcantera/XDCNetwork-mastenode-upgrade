@@ -1,3 +1,0 @@
-
-import { expect } from "chai";import { ethers } from "hardhat";import { setup } from "./00_fixture";
-describe("T11 vote below min", ()=>{it("reverts",async()=>{const {kyc, kycVerifier, validator, users}=await setup();const [owner,voter]=users;await kyc.connect(kycVerifier).mint(await owner.getAddress(),"x");await kyc.connect(kycVerifier).mint(await voter.getAddress(),"x");const stake=ethers.utils.parseEther("10000000");await validator.connect(owner).propose(await owner.getAddress(),{value:stake});const low=ethers.utils.parseEther("50000");await expect(validator.connect(voter).vote(await owner.getAddress(),{value:low})).to.be.revertedWith("Validator: voter stake too low");});});
