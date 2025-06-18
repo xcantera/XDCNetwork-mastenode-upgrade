@@ -1,0 +1,2 @@
+import { expect } from "chai";import { ethers } from "hardhat";import { setup } from "./00_fixture";
+describe("T26 exact min stake propose",()=>{it("works",async()=>{const ctx=await setup();const [owner]=ctx.users;await ctx.kyc.connect(ctx.kycVerifier).mint(await owner.getAddress(),"m");const stake=ethers.utils.parseEther("10000000");await expect(ctx.validator.connect(owner).propose(await owner.getAddress(),{value:stake})).to.emit(ctx.validator,"Propose");});});

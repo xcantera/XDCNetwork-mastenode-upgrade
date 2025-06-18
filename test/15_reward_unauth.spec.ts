@@ -1,0 +1,3 @@
+
+import { expect } from "chai";import { ethers } from "hardhat";import { setup } from "./00_fixture";
+describe("T15 reward unauth",()=>{it("allocateReward blocked",async()=>{const {kyc, kycVerifier, validator, users}=await setup();const owner=users[0];await kyc.connect(kycVerifier).mint(await owner.getAddress(),"k");const stake=ethers.utils.parseEther("10000000");await validator.connect(owner).propose(await owner.getAddress(),{value:stake});const reward=ethers.utils.parseEther("1");await expect(validator.connect(owner).allocateEpochReward(await owner.getAddress(),reward,{value:reward})).to.be.revertedWith("Ownable: caller is not the owner");});});

@@ -1,0 +1,2 @@
+import { expect } from "chai";import { ethers } from "hardhat";import { setup } from "./00_fixture";
+describe("T23 KYCToken soulbound",()=>{it("cannot transfer",async()=>{const ctx=await setup();const [holder,dest]=ctx.users;await ctx.kyc.connect(ctx.kycVerifier).mint(await holder.getAddress(),"uri");const tokenId = await ctx.kyc.tokenOfOwnerByIndex(await holder.getAddress(),0).catch(()=>0);await expect(ctx.kyc.connect(holder)["safeTransferFrom(address,address,uint256)"](await holder.getAddress(),await dest.getAddress(), tokenId)).to.be.reverted;});});

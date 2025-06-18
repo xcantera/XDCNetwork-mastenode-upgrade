@@ -1,0 +1,2 @@
+import { expect } from "chai";import { ethers } from "hardhat";import { setup } from "./00_fixture";
+describe("T28 zero candidate address",()=>{it("reverts",async()=>{const ctx=await setup();const [owner]=ctx.users;await ctx.kyc.connect(ctx.kycVerifier).mint(await owner.getAddress(),"m");const stake=ethers.utils.parseEther("10000000");await expect(ctx.validator.connect(owner).propose(ethers.constants.AddressZero,{value: stake})).to.be.revertedWith("Validator: zero candidate");});});
