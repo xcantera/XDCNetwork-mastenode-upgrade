@@ -1,4 +1,3 @@
-Below is a **ready-to-paste `README.md`** for the repo that now contains the upgraded masternode contracts and the 35-test Hardhat suite.
 
 ---
 
